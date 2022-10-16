@@ -1,4 +1,4 @@
-import './gerenciador-tarefas.css';
+import './GerenciadorTarefas.css';
 import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
 
 const router = createBrowserRouter([
