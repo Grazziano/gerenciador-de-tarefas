@@ -1,8 +1,27 @@
 import './gerenciador-tarefas.css';
+import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <ListarTarefas />,
+  },
+  {
+    path: '/cadastrar',
+    element: <CadastrarTarefa />,
+  },
+  {
+    path: '/atualizar:id',
+    element: <AtualizarTarefa />,
+  },
+]);
 
 function GerenciadorTarefas() {
   return (
-    <h1>Gerenciador de Tarefas</h1>
+    <div>
+      <h1>Gerenciador de Tarefas</h1>
+      <RouterProvider router={router} />
+    </div>
   );
 }
 
