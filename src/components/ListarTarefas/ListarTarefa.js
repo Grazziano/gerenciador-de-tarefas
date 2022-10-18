@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import ItensListaTarefas from './ItensListaTarefas/ItensListaTarefas';
 
 function ListarTarefas() {
   const [tarefas, setTarefas] = useState([]);
@@ -41,7 +42,12 @@ function ListarTarefas() {
           </tr>
         </thead>
 
-        <tbody></tbody>
+        <tbody>
+          <ItensListaTarefas
+            tarefas={tarefas}
+            recarregarTarefas={setCarregarTarefas}
+          />
+        </tbody>
       </Table>
     </div>
   );
