@@ -1,10 +1,27 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 function ListarTarefas() {
+  const [tarefas, setTarefas] = useState([]);
+  const [carregarTarefas, setCarregarTarefas] = useState(true);
+
+  useEffect(() => {
+    function obterTarefas() {
+      const tarefasDB = localStorage['tarefas'];
+      let listarTarefas = tarefasDB ? JSON.parse(tarefasDB) : [];
+      setTarefas(listarTarefas);
+      console.log(listarTarefas);
+    }
+
+    if (carregarTarefas) {
+      obterTarefas();
+      setCarregarTarefas(false);
+    }
+  }, [carregarTarefas]);
+
   return (
     <div className="text-center">
       <h3>Tarefas a fazer</h3>
