@@ -2,7 +2,7 @@ import ListarTarefas from './components/ListarTarefas/ListarTarefa';
 import CadastrarTarefa from './components/CadastrarTarefa/CadastrarTarefa';
 import AtualizarTarefa from './components/AtualizarTarefa/AtualizarTarefa';
 import './GerenciadorTarefas.css';
-import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const router = createBrowserRouter([
   {
