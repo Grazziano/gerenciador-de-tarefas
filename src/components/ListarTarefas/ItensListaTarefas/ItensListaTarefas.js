@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ConcluirTarefa from '../ConcluirTarefa/ConcluirTarefa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
@@ -21,6 +22,12 @@ function ItensListaTarefas(props) {
             {tarefa.name}
           </td>
           <td className="text-right">
+            <ConcluirTarefa
+              tarefa={tarefa}
+              recarregarTarefas={props.recarregarTarefas}
+              className={tarefa.finish ? 'hidden' : null}
+            />
+            &nbsp;
             <Link
               to={'/atualizar/' + tarefa.id}
               className={tarefa.finish ? 'hidden' : 'btn btn-warning btn-sm'}

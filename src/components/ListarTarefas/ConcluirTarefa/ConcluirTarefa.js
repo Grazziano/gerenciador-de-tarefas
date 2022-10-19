@@ -16,7 +16,22 @@ function ConcluirTarefa(props) {
     setExibirModal(false);
   }
 
-  function handleConcluirTarefa() {}
+  function handleConcluirTarefa(event) {
+    event.preventDefault();
+    const tarefasDb = localStorage['tarefas'];
+    let tarefas = tarefasDb ? JSON.parse(tarefasDb) : [];
+
+    tarefas = tarefas.map((tarefa) => {
+      if (tarefa.id === props.tarefa.id) {
+        tarefa.finish = !tarefa.finish;
+      }
+      return tarefa;
+    });
+
+    localStorage['tarefas'] = JSON.stringify(tarefas);
+    setExibirModal(false);
+    props.recarregarTarefas(true);
+  }
 
   return (
     <span className={props.className}>
@@ -60,7 +75,7 @@ function ConcluirTarefa(props) {
 ConcluirTarefa.propTypes = {
   tarefa: PropTypes.object.isRequired,
   recarregarTarefas: PropTypes.func.isRequired,
-  className: PropTypes.string.isRequired,
+  className: PropTypes.string,
 };
 
 export default ConcluirTarefa;
