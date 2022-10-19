@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Alert, Button, Form, Modal } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import Tarefa from '../../models/tarefa.model';
+import Tarefa from '../../models/Tarefa.model';
 
 function CadastrarTarefa() {
   const [tarefa, setTarefa] = useState('');
