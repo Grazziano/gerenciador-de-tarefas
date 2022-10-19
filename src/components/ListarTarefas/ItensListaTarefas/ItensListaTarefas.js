@@ -4,6 +4,7 @@ import ConcluirTarefa from '../ConcluirTarefa/ConcluirTarefa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import RemoverTarefa from '../RemoverTarefa/RemoverTarefa';
 
 function ItensListaTarefas(props) {
   function marcarConcluida(tarefa) {
@@ -34,6 +35,11 @@ function ItensListaTarefas(props) {
             >
               <FontAwesomeIcon icon={faEdit} />
             </Link>
+            &nbsp;
+            <RemoverTarefa
+              tarefa={tarefa}
+              recarregarTarefas={props.recarregarTarefas}
+            />
           </td>
         </tr>
       ))}
