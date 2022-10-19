@@ -4,6 +4,12 @@ import '@testing-library/jest-dom/extend-expect';
 import { BrowserRouter, MemoryRouter } from 'react-router-dom';
 
 describe('Teste do componente de cadastro de tarefas', () => {
+  it('Deve renderizar o componente sem erros', () => {
+    render(<CadastrarTarefa />, {
+      wrapper: BrowserRouter,
+    });
+  });
+
   it('Deve cadastrar uma nova tarefa', () => {
     render(<CadastrarTarefa />, { wrapper: BrowserRouter });
 

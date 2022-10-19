@@ -9,6 +9,22 @@ describe('Teste do componente que exibe um item da lista de tarefas', () => {
   const tarefa = new Tarefa(1, nomeTarefa, false);
   const tarefaConcluida = new Tarefa(2, nomeTarefa, true);
 
+  it('Deve renderizar o componente sem erros', () => {
+    render(
+      <table>
+        <tbody>
+          <ItensListaTarefas
+            tarefas={[tarefa]}
+            recarregarTarefas={() => false}
+          />
+        </tbody>
+      </table>,
+      {
+        wrapper: BrowserRouter,
+      }
+    );
+  });
+
   it('Deve exibir a tarefa', () => {
     render(
       <table>
