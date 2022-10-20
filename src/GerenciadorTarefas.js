@@ -21,7 +21,7 @@ const router = createBrowserRouter([
 
 function GerenciadorTarefas() {
   return (
-    <div>
+    <div className="container">
       <h1>Gerenciador de Tarefas</h1>
       <RouterProvider router={router} />
     </div>
