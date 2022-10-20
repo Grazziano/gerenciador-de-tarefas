@@ -4,24 +4,40 @@ import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import ItensListaTarefas from './ItensListaTarefas/ItensListaTarefas';
+import Paginacao from './Paginacao/Paginacao';
 
 function ListarTarefas() {
+  const ITENS_POR_PAGINA = 3;
+
   const [tarefas, setTarefas] = useState([]);
   const [carregarTarefas, setCarregarTarefas] = useState(true);
+  const [totalItems, setTotalItems] = useState(0);
+  const [paginaAtual, setPaginaAtual] = useState(1);
 
   useEffect(() => {
     function obterTarefas() {
       const tarefasDB = localStorage['tarefas'];
-      let listarTarefas = tarefasDB ? JSON.parse(tarefasDB) : [];
-      setTarefas(listarTarefas);
-      console.log(listarTarefas);
+      let listaTarefas = tarefasDB ? JSON.parse(tarefasDB) : [];
+      setTotalItems(listaTarefas.length);
+      setTarefas(
+        listaTarefas.splice(
+          (paginaAtual - 1) * ITENS_POR_PAGINA,
+          ITENS_POR_PAGINA
+        )
+      );
+      // console.log(listaTarefas);
     }
 
     if (carregarTarefas) {
       obterTarefas();
       setCarregarTarefas(false);
     }
-  }, [carregarTarefas]);
+  }, [carregarTarefas, paginaAtual]);
+
+  function handleMudarPagina(pagina) {
+    setPaginaAtual(pagina);
+    setCarregarTarefas(true);
+  }
 
   return (
     <div className="text-center">
@@ -49,6 +65,12 @@ function ListarTarefas() {
           />
         </tbody>
       </Table>
+      <Paginacao
+        totalItems={totalItems}
+        itemsPorPagina={ITENS_POR_PAGINA}
+        paginaAtual={paginaAtual}
+        mudarPagina={handleMudarPagina}
+      />
     </div>
   );
 }
