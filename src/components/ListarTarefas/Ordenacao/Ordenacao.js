@@ -9,15 +9,15 @@ import PropTypes from 'prop-types';
 
 function Ordenacao(props) {
   function handleAscDesc() {
-    return props.ordenarAsc || props.ordenarDesc ? 'hidden' : '';
+    return props.ordenarAsc || props.ordenarDesc ? 'd-none' : '';
   }
 
   function handleAsc() {
-    return props.ordenarAsc ? '' : 'hidden';
+    return props.ordenarAsc ? '' : 'd-none';
   }
 
   function handleDesc() {
-    return props.ordenarDesc ? '' : 'hidden';
+    return props.ordenarDesc ? '' : 'd-none';
   }
 
   return (
