@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import ItensListaTarefas from './ItensListaTarefas/ItensListaTarefas';
+import Ordenacao from './Ordenacao/Ordenacao';
 import Paginacao from './Paginacao/Paginacao';
 
 function ListarTarefas() {
@@ -79,7 +80,8 @@ function ListarTarefas() {
           <tr>
             <th>
               <a href="/" onClick={handleOrdenar}>
-                Tarefa
+                Tarefa {' '}
+                <Ordenacao ordenarAsc={ordenarAsc} ordenarDesc={ordenarDesc} />
               </a>
             </th>
             <th>
