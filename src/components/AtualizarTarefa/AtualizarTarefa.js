@@ -1,14 +1,26 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
 import { Alert, Button, Form, Modal } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
-function AtualizarTarefa(props) {
+function AtualizarTarefa() {
   const [exibirModal, setExibirModal] = useState(false);
   const [formValidado, setFormValidado] = useState(false);
   const [tarefa, setTarefa] = useState('');
+  const [carregarTarefa, setCarregarTarefa] = useState(true);
+
+  const idTarefa = useParams();
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (carregarTarefa) {
+      const tarefasDb = localStorage['tarefas'];
+      const tarefas = tarefasDb ? JSON.parse(tarefasDb) : [];
+      const find = tarefas.filter((t) => t.id === parseInt(idTarefa.id))[0];
+      setTarefa(find.name);
+      setCarregarTarefa(false);
+    }
+  }, [carregarTarefa]);
 
   function voltar(event) {
     event.preventDefault();
@@ -56,7 +68,7 @@ function AtualizarTarefa(props) {
               A tarefa deve conter ao menos 5 caracteres.
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group className="text-center">
+          <Form.Group className="text-center my-3">
             <Button variant="success" type="button" data-testid="btn-atualizar">
               Atualizar
             </Button>
@@ -85,9 +97,5 @@ function AtualizarTarefa(props) {
     </div>
   );
 }
-
-AtualizarTarefa.propTypes = {
-  id: PropTypes.number.isRequired,
-};
 
 export default AtualizarTarefa;
