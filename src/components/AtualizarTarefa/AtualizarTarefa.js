@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Alert, Button, Form } from 'react-bootstrap';
+import { Alert, Button, Form, Modal } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 
 function AtualizarTarefa(props) {
+  const [exibirModal, setExibirModal] = useState(false);
+
   const navigate = useNavigate();
 
   function voltar(event) {
     event.preventDefault();
+    navigate('/');
+  }
+
+  function handleFecharModal() {
     navigate('/');
   }
 
@@ -40,6 +46,21 @@ function AtualizarTarefa(props) {
             </Link>
           </Form.Group>
         </Form>
+        <Modal
+          show={exibirModal}
+          onHide={handleFecharModal}
+          data-testid="modal"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Sucesso</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Tarefa atualizada com sucesso!</Modal.Body>
+          <Modal.Footer>
+            <Button variant="success" onClick={handleFecharModal}>
+              Continuar
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </Alert>
     </div>
   );
