@@ -8,7 +8,7 @@ function AtualizarTarefa() {
   const [tarefa, setTarefa] = useState('');
   const [carregarTarefa, setCarregarTarefa] = useState(true);
 
-  const idTarefa = useParams();
+  const { id } = useParams();
 
   const navigate = useNavigate();
 
@@ -16,11 +16,11 @@ function AtualizarTarefa() {
     if (carregarTarefa) {
       const tarefasDb = localStorage['tarefas'];
       const tarefas = tarefasDb ? JSON.parse(tarefasDb) : [];
-      const find = tarefas.filter((t) => t.id === parseInt(idTarefa.id))[0];
+      const find = tarefas.filter((t) => t.id === parseInt(id))[0];
       setTarefa(find.name);
       setCarregarTarefa(false);
     }
-  }, [carregarTarefa]);
+  }, [carregarTarefa, id]);
 
   function voltar(event) {
     event.preventDefault();
@@ -36,8 +36,18 @@ function AtualizarTarefa() {
     setFormValidado(true);
     if (event.currentTarget.checkValidity() === true) {
       // obtém as tarefas
+      const tarefasDb = localStorage['tarefas'];
+      let tarefas = tarefasDb ? JSON.parse(tarefasDb) : [];
 
       // persistir a tarefa atualizada
+      tarefas = tarefas.map((tarefaObj) => {
+        if (tarefaObj.id === parseInt(id)) {
+          tarefaObj.name = tarefa;
+        }
+        return tarefaObj;
+      });
+
+      localStorage['tarefas'] = JSON.stringify(tarefas);
 
       setExibirModal(true);
     }
@@ -69,7 +79,12 @@ function AtualizarTarefa() {
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="text-center my-3">
-            <Button variant="success" type="button" data-testid="btn-atualizar">
+            <Button
+              variant="success"
+              type="button"
+              data-testid="btn-atualizar"
+              onClick={atualizar}
+            >
               Atualizar
             </Button>
             &nbsp;
