@@ -26,12 +26,12 @@ function ItensListaTarefas(props) {
             <ConcluirTarefa
               tarefa={tarefa}
               recarregarTarefas={props.recarregarTarefas}
-              className={tarefa.finish ? 'hidden' : null}
+              className={tarefa.finish ? 'd-none' : null}
             />
             &nbsp;
             <Link
               to={'/atualizar/' + tarefa.id}
-              className={tarefa.finish ? 'hidden' : 'btn btn-warning btn-sm'}
+              className={tarefa.finish ? 'd-none' : 'btn btn-warning btn-sm'}
             >
               <FontAwesomeIcon icon={faEdit} />
             </Link>
