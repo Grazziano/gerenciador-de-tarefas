@@ -5,6 +5,8 @@ import { Link, useNavigate } from 'react-router-dom';
 
 function AtualizarTarefa(props) {
   const [exibirModal, setExibirModal] = useState(false);
+  const [formValidado, setFormValidado] = useState(false);
+  const [tarefa, setTarefa] = useState('');
 
   const navigate = useNavigate();
 
@@ -17,11 +19,27 @@ function AtualizarTarefa(props) {
     navigate('/');
   }
 
+  function atualizar(event) {
+    event.preventDefault();
+    setFormValidado(true);
+    if (event.currentTarget.checkValidity() === true) {
+      // obtém as tarefas
+
+      // persistir a tarefa atualizada
+
+      setExibirModal(true);
+    }
+  }
+
+  function handleTxtTarefa(event) {
+    setTarefa(event.target.value);
+  }
+
   return (
     <div>
       <h3 className="text-center">Atualizar</h3>
       <Alert variant="secondary">
-        <Form noValidate>
+        <Form onSubmit={atualizar} noValidate validated={formValidado}>
           <Form.Group>
             <Form.Label>Tarefa</Form.Label>
             <Form.Control
@@ -31,6 +49,8 @@ function AtualizarTarefa(props) {
               maxLength="100"
               required
               data-testid="txt-tarefa"
+              value={tarefa}
+              onChange={handleTxtTarefa}
             />
             <Form.Control.Feedback type="invalid">
               A tarefa deve conter ao menos 5 caracteres.
