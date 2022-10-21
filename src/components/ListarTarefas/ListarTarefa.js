@@ -1,7 +1,7 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
-import { Table } from 'react-bootstrap';
+import { Form, Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import ItensListaTarefas from './ItensListaTarefas/ItensListaTarefas';
 import Ordenacao from './Ordenacao/Ordenacao';
@@ -16,6 +16,7 @@ function ListarTarefas() {
   const [paginaAtual, setPaginaAtual] = useState(1);
   const [ordenarAsc, setOrdenarAsc] = useState(false);
   const [ordenarDesc, setOrdenarDesc] = useState(false);
+  const [filtroTarefa, setFiltroTarefa] = useState('');
 
   useEffect(() => {
     function obterTarefas() {
@@ -72,6 +73,11 @@ function ListarTarefas() {
     setCarregarTarefas(true);
   }
 
+  function handleFiltrar(event) {
+    setFiltroTarefa(event.target.value);
+    setCarregarTarefas(true);
+  }
+
   return (
     <div className="text-center">
       <h3>Tarefas a fazer</h3>
@@ -80,7 +86,7 @@ function ListarTarefas() {
           <tr>
             <th>
               <a href="/" onClick={handleOrdenar}>
-                Tarefa {' '}
+                Tarefa{' '}
                 <Ordenacao ordenarAsc={ordenarAsc} ordenarDesc={ordenarDesc} />
               </a>
             </th>
@@ -93,6 +99,18 @@ function ListarTarefas() {
                 <FontAwesomeIcon icon={faPlus} /> Nova tarefa
               </Link>
             </th>
+          </tr>
+          <tr>
+            <th>
+              <Form.Control
+                type="text"
+                value={filtroTarefa}
+                onChange={handleFiltrar}
+                data-testid="txt-tarefa"
+                className="filtro-tarefa"
+              />
+            </th>
+            <th>&nbsp;</th>
           </tr>
         </thead>
 
